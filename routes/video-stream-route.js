@@ -1,12 +1,8 @@
-import { Router } from "express";
-import {
-  renderVideo,
-  streamVideo,
-} from "../controllers/video-stream-controller";
+var express = require('express');
+var router = express.Router();
+var videoStreamController = require('../controllers/video-stream-controller');
 
-const router = Router();
+router.get('/:id', videoStreamController.renderVideo);
+router.get('/:file_name/play', videoStreamController.streamVideo)
 
-router.get("/:id", renderVideo);
-router.get("/video/:file_name", streamVideo);
-
-export default router;
+module.exports = router;

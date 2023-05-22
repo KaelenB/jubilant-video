@@ -1,32 +1,32 @@
-import { resolve } from "path";
-import { fileUploadConfig } from "../config/file-upload-config";
-import { saveToDB } from "../db/handle-db";
-import multer from "multer";
+const path = require('path');
+const fileUploadConfig = require('../config/file-upload-config').fileUploadConfig;
+const handleDb = require('../db/handle-db');
+const multer  = require('multer');
 
-export const initUploadPage = (req, res) => {
-  res.sendFile(resolve(__dirname + "/../public/video_upload_test.html"));
+module.exports.initUploadPage = function(req, res) {
+  res.sendFile(path.resolve(__dirname + '/../public/video_upload_test.html'));
 }
 
-export const uploadFile = (req, res) => {
-  const upload = multer(fileUploadConfig).single("user-file");
-  upload(req, res, (uploadError) => {
-    if (uploadError) {
-      let errorMessage;
-      if (uploadError.code === "LIMIT_FILE_TYPE") {
+module.exports.uploadFile = function(req, res) {
+  var upload = multer(fileUploadConfig).single('user-file');
+  upload(req, res, function(uploadError){
+    if(uploadError){
+      var errorMessage;
+      if(uploadError.code === 'LIMIT_FILE_TYPE') {
         errorMessage = uploadError.errorMessage;
-      } else if (uploadError.code === "LIMIT_FILE_SIZE") {
-        errorMessage = `Maximum file size allowed is ${process.env.FILE_SIZE}MB`;
+      } else if(uploadError.code === 'LIMIT_FILE_SIZE'){
+          errorMessage = 'Maximum file size allowed is ' + process.env.FILE_SIZE + 'MB';
       }
       return res.json({
-        error: errorMessage,
+        error: errorMessage
       });
     }
-    const fileId = req.file.filename.split("-")[0];
-    const link = `http://${req.hostname}:${process.env.PORT}/video/${req.file.filename}/play`;
+    const fileId = req.file.filename.split('-')[0];
+    const link = 'http://' + req.hostname + ':' + process.env.PORT + '/video/' + fileId
 
     res.json({
       success: true,
-      link: link,
+      link: link
     });
     const attributesToBeSaved = {
       id: fileId,
@@ -34,8 +34,9 @@ export const uploadFile = (req, res) => {
       size: req.file.size,
       path: req.file.path,
       encoding: req.file.encoding,
-      details: req.body.details ? req.body.details : "",
-    };
-    saveToDB(attributesToBeSaved);
+      details: req.body.details ? req.body.details : ''
+    }
+    handleDb.saveToDB(attributesToBeSaved);
+    // return res.send(req.file);
   });
 }
