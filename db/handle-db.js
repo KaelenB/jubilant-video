@@ -22,5 +22,8 @@ module.exports.getFile = (fileId) => {
   }
   data = this.readFromDB();
   return data[fileId];
+}
 
+module.exports.getAllFiles = () => {
+  return this.readFromDB();
 }

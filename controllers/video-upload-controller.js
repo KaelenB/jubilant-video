@@ -9,7 +9,7 @@ module.exports.initUploadPage = (req, res) => {
 
 module.exports.uploadFile = (req, res) => {
   const upload = multer(fileUploadConfig).single('user-file');
-  upload(req, res, function(uploadError){
+  upload(req, res, (uploadError) => {
     if(uploadError){
       let errorMessage;
       if(uploadError.code === 'LIMIT_FILE_TYPE') {
