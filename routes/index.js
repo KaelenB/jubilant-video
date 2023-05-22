@@ -1,15 +1,15 @@
-var express = require('express');
-var path = require('path');
-var router = express.Router();
-var videoUpload = require('./video-upload-route')
-var videoStream = require('./video-stream-route')
+import { Router } from "express";
+import { resolve } from "path";
+import videoUpload from "./video-upload-route";
+import videoStream from "./video-stream-route";
 
-router.use('/', videoUpload);
-router.use('/video', videoStream);
+const router = Router();
 
+router.use("/", videoUpload);
+router.use("/", videoStream);
 
-router.get('*', function(req, res){
-    res.sendFile(path.resolve(__dirname + '/../public/404.html'));
-});
+router.get("*", (req, res) =>
+  res.sendFile(resolve(__dirname + "/../public/404.html"))
+);
 
-module.exports = router;
+export default router;

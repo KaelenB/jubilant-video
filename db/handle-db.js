@@ -1,26 +1,25 @@
-const fileName = 'db/uploaded-files.js';
-const fs = require('fs');
+import { writeFileSync, readFileSync } from "fs";
+const fileName = "db/uploaded-files.js";
 
-module.exports.saveToDB =  function(data) {
+export const saveToDB = (data) => {
   currentData = this.readFromDB();
   currentData[data.id] = data;
   currentData = JSON.stringify(currentData);
-  fs.writeFileSync(fileName, currentData, 'utf8');
-}
+  writeFileSync(fileName, currentData, "utf8");
+};
 
-module.exports.readFromDB = function() {
-  var data = fs.readFileSync(fileName, 'utf8');
+export const readFromDB = () => {
+  const data = readFileSync(fileName, "utf8");
   if (!data) {
     data = "{}";
   }
   return JSON.parse(data);
-}
+};
 
-module.exports.getFile = function(fileId) {
+export const getFile = (fileId) => {
   if (!fileId) {
     return null;
   }
   data = this.readFromDB();
   return data[fileId];
-
-}
+};
