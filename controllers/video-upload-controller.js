@@ -4,7 +4,7 @@ const handleDb = require('../db/handle-db');
 const multer  = require('multer');
 
 module.exports.initUploadPage = (req, res) => {
-  res.sendFile(path.resolve(__dirname + '/../public/video_upload_test.html'));
+  res.sendFile(path.resolve(__dirname + '/../public/video_upload.html'));
 }
 
 module.exports.uploadFile = (req, res) => {
@@ -22,7 +22,7 @@ module.exports.uploadFile = (req, res) => {
       });
     }
     const fileId = req.file.filename.split('-')[0];
-    const link = `http://${req.hostname}:${process.env.PORT}/video/${req.file.filename}`;
+    const link = `http://${req.hostname}:${process.env.PORT}/video/${fileId}`;
 
     res.json({
       success: true,

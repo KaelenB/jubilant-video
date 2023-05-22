@@ -17,7 +17,7 @@ const streamVideoFile = (req, res, video_file) => {
     const end = positions[1] ? parseInt(positions[1], 10) : total - 1;
     const chunksize = end - start + 1;
     res.writeHead(206, {
-      "Content-Range": "bytes " + start + "-" + end + "/" + total,
+      "Content-Range": `bytes ${start}-${end}/${total}`,
       "Accept-Ranges": "bytes",
       "Content-Length": chunksize,
       "Content-Type": "video/mp4",
@@ -40,21 +40,17 @@ module.exports.renderVideo = (req, res) => {
   const storedFileName = fileDetails.path.split("/")[1];
   const videoDetails = fileDetails.details || "NA";
   const videoName = fileDetails.name;
-  const index_file =
-    `<!DOCTYPE html>
+  const index_file = `<!DOCTYPE html>
   <html>
     <title>Sample Video Stream</title>
     <body>
         <video width="320" height="240" controls>
-            <source src="/video/` +
-    storedFileName +
-    `/play" type="video/mp4"/>
+            <source src="/video/${storedFileName}/play" type="video/mp4"/>
             Your browser does not support the <code>video</code> element.
         </video>
         <br>
         <div>
-          <strong>Video Details: </strong>
-          ${videoDetails}
+          <strong>Video Details: </strong>${videoDetails}
         </div>
         <div>
           <strong>Video Name: </strong>${videoName}

@@ -1,14 +1,14 @@
 const fileName = 'db/uploaded-files.js';
 const fs = require('fs');
 
-module.exports.saveToDB =  function(data) {
+module.exports.saveToDB = (data) => {
   currentData = this.readFromDB();
   currentData[data.id] = data;
   currentData = JSON.stringify(currentData);
   fs.writeFileSync(fileName, currentData, 'utf8');
 }
 
-module.exports.readFromDB = function() {
+module.exports.readFromDB = () => {
   var data = fs.readFileSync(fileName, 'utf8');
   if (!data) {
     data = "{}";
@@ -16,7 +16,7 @@ module.exports.readFromDB = function() {
   return JSON.parse(data);
 }
 
-module.exports.getFile = function(fileId) {
+module.exports.getFile = (fileId) => {
   if (!fileId) {
     return null;
   }
