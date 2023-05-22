@@ -11,7 +11,7 @@ shouldParseRequest = (req) => {
   const restrictedRoutes = [
     {
       method: "POST",
-      originalUrl: "/",
+      originalUrl: "/upload/",
     },
   ];
 

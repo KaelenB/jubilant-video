@@ -11,8 +11,11 @@ module.exports.initSearchPage = (req, res) => {
   }
 
   res.send(`<DOCTYPE !html>
-    <html><head><title>Video Search</title></head>
+    <html><head>
+    </head>
     <body>
+    <a href="/upload">Upload Files</a>
+    <br>
     <form action="/video/search" method="post">
     <label for="search">Search:</label>
     <input type="text" id="search" name="search">

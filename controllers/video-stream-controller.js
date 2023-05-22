@@ -42,6 +42,8 @@ module.exports.renderVideo = (req, res) => {
   const videoName = fileDetails.name;
   const index_file = `<!DOCTYPE html>
   <html>
+    <a href="/">Home</a>
+    <br>
     <title>Sample Video Stream</title>
     <body>
         <video width="320" height="240" controls>

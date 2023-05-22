@@ -1,6 +1,6 @@
 const onSubmit = (e) => {
   e.preventDefault();
-  var customMessage = document.getElementById("message");
+  const customMessage = document.getElementById("message");
   if (validateForm(customMessage)) {
     uploadVideo(customMessage);
   }
@@ -24,9 +24,9 @@ const validateForm = (customMessage) => {
 const uploadVideo = (customMessage) => {
   document.getElementById("submit").disabled = true;
   customMessage.innerHTML = "uploading video..";
-  var formElement = document.getElementById("video-upload");
-  var request = new XMLHttpRequest();
-  request.open("POST", "/", true);
+  const formElement = document.getElementById("video-upload");
+  const request = new XMLHttpRequest();
+  request.open("POST", "/upload/", true);
   request.onload = onComplete;
   request.upload.onprogress = fileUploadPercentage;
   const data = new FormData(formElement);
@@ -34,7 +34,7 @@ const uploadVideo = (customMessage) => {
 };
 
 const onComplete = (event) => {
-  var customMessage = document.getElementById("message");
+  const customMessage = document.getElementById("message");
   const response = JSON.parse(event.currentTarget.response);
   if (response.success) {
     document.getElementById("main-div").style.display = "none";
@@ -49,8 +49,8 @@ const onComplete = (event) => {
 
 const fileUploadPercentage = (e) => {
   if (e.lengthComputable) {
-    var customMessage = document.getElementById("message");
-    var percentage = (e.loaded / e.total) * 100;
+    const customMessage = document.getElementById("message");
+    const percentage = (e.loaded / e.total) * 100;
     customMessage.innerHTML = `Uploading Video: ${percentage} %`;
   }
 };
