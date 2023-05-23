@@ -40,26 +40,8 @@ module.exports.renderVideo = (req, res) => {
   const storedFileName = fileDetails.path.split("/")[1];
   const videoDetails = fileDetails.details || "NA";
   const videoName = fileDetails.name;
-  const index_file = `<!DOCTYPE html>
-  <html>
-    <a href="/">Home</a>
-    <br>
-    <title>Sample Video Stream</title>
-    <body>
-        <video width="320" height="240" controls>
-            <source src="/video/${storedFileName}/play" type="video/mp4"/>
-            Your browser does not support the <code>video</code> element.
-        </video>
-        <br>
-        <div>
-          <strong>Video Details: </strong>${videoDetails}
-        </div>
-        <div>
-          <strong>Video Name: </strong>${videoName}
-        </div>
-    </body>
-  </html>`;
-  res.send(index_file);
+
+  res.render("play", { storedFileName: storedFileName, videoDetails: videoDetails, videoName: videoName })
 };
 
 module.exports.streamVideo = (req, res) => {

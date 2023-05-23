@@ -5,23 +5,10 @@ const multer = require("multer");
 module.exports.initSearchPage = (req, res) => {
   const data = handleDb.getAllFiles();
 
-  let listItems = "";
+  let listItems = []
   for (const fileId in data) {
-    listItems += `<li><a href="/video/${data[fileId].id}">${data[fileId].name}</a></li>`;
+    listItems.push(data[fileId]);
   }
 
-  res.send(`<DOCTYPE !html>
-    <html><head>
-    </head>
-    <body>
-    <a href="/upload">Upload Files</a>
-    <br>
-    <form action="/video/search" method="post">
-    <label for="search">Search:</label>
-    <input type="text" id="search" name="search">
-    <input type="submit" value="Submit">
-    </form>
-    ${listItems ? `<ul>${listItems}</ul>` : "<div>No videos found</div>"}
-    </body>
-    </html>`);
+  res.render("search", { showListItems: (listItems.length > 0), listItems: listItems });
 };

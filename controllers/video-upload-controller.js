@@ -5,7 +5,7 @@ const handleDb = require("../db/handle-db");
 const multer = require("multer");
 
 module.exports.initUploadPage = (req, res) => {
-  res.sendFile(path.resolve(__dirname + "/../public/video_upload.html"));
+  res.render("upload", {layout: "upload"});
 };
 
 module.exports.uploadFile = (req, res) => {
