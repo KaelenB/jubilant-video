@@ -4,5 +4,15 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "start",
+				"type": "docker",
+				"request":"launch"
+			}
+		],
+	}
 }

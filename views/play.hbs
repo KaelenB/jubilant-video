@@ -1,10 +1,10 @@
 <div id="main-div">
-    <a href="/">Home</a>
-    <br>
-    <video width="320" height="240" controls>
-        <source src="/video/{{storedFileName}}/play" type="video/mp4" />
-        Your browser does not support the <code>video</code> element.
-    </video>
+    <div class="text-center">
+        <video style="aspect-ratio: auto 16 / 9; width: 80%; min-width: 320px" controls>
+            <source src="/video/{{storedFileName}}/play" type="video/mp4" />
+            Your browser does not support the <code>video</code> element.
+        </video>
+    </div>
     <br>
     <strong>Video Details: </strong>{{videoDetails}}
     <br>
